@@ -103,7 +103,7 @@ class rrCommand extends Command {
 									type: 2,
 									style: 5,
 									label: "Scroll to the Top",
-									url: "https://discord.com/channels/954440824127643698/954440825167835146/956975811364282388"
+									url: messageArray[0]
 								}
 							]
 						}
