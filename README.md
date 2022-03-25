@@ -1,2 +1,2 @@
 # tapioca
-a bot for Sakura Bubble Tea Discord server
+Discord bot for [Sakura Bubble Tea](https://discord.gg/8yZJvm68se)
