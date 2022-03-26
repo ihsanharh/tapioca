@@ -1,5 +1,6 @@
 const { Client, Collection, Intents } = require('discord.js');
 const { readdirSync } = require('fs');
+const textInput = require("../../lib/discord-modals");
 
 class Tapioca extends Client {
 	constructor() {
@@ -44,7 +45,9 @@ class Tapioca extends Client {
 	}
 	
 	prepare() {
-		let basePath = __dirname.replace("base", "");
+		const basePath = __dirname.replace("base", "");
+		
+		textInput(this);
 		
 		readdirSync(basePath + "/listeners/").forEach(folder => {
 			readdirSync(basePath + `/listeners/${folder}`).forEach(file => {
