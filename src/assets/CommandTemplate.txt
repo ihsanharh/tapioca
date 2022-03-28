@@ -1,0 +1,23 @@
+const Command = require("../../base/Command.js");
+
+class <T>Command extends Command {
+	constructor(client) {
+		super(client, {
+			name: String,
+			description: String,
+			active: Boolean<false>,
+			private: Boolean<true>,
+			slash: Boolean<false>,
+			options: [Object<any>],
+			usages: [Array<String>],
+			permission: {
+				author: [Array<String>],
+				me: [Array<String>]
+			}
+		});
+	}
+	
+	async execute(command): Promise<Command> {}
+}
+
+module.exports = <T>Command;

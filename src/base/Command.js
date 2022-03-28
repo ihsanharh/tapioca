@@ -4,6 +4,8 @@ class Command {
 		
 		Object.defineProperty(this, "client", { value: client });
 		
+		Object.defineProperty(this, "colors", { value: require("../assets/color.json") });
+		
 		Object.defineProperty(this, "command", { value: null, writable: true });
 	}
 	

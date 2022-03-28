@@ -1,15 +1,23 @@
 const { readFileSync } = require('fs');
+const { nanoid } = require('nanoid');
 const colors = require("../../assets/color.json");
+const channels = require("../../config/channel.json")
 const rrOptions = require("../../assets/match/rr.json");
+
+const TicketManager = require("../../plugins/TicketManager.js");
 
 const separate = (item) => {
 	return item.replace(/<|>|@|&/g, "").split(":").filter(item => item);
 }
 
 module.exports = async (interaction, client) => {
-	if (interaction.user.bot) return;
+	if (interaction.user.bot) return interaction.reply({ content: "You're bot.", ephemeral: true });
 	
 	if (interaction.isCommand()) {
+		/**
+		 * Slash Command handler
+		 * @return {Interaction}
+		 */
 		interaction.prefix = "/";
 		var command = client.commands.get(interaction.commandName);
 		
@@ -33,6 +41,10 @@ module.exports = async (interaction, client) => {
 	}
 	
 	if (interaction.isSelectMenu()) {
+		/**
+		 * Selection Roles
+		 * 
+		 */
 		if (interaction.customId.includes("_rr")) {
 			let added = [];
 			let removed = [];
@@ -53,12 +65,8 @@ module.exports = async (interaction, client) => {
 				}
 			});
 			
-			added = added.map(role => {
-				return role
-			}).join(", ")
-			removed = removed.map(role => {
-				return role
-			}).join(", ")
+			added = added.map(role => { return role }).join(", ");
+			removed = removed.map(role => { return role }).join(", ");
 			
 			let message = " "
 			if (added.length >= 1 && removed.length < 1) {
@@ -71,5 +79,9 @@ module.exports = async (interaction, client) => {
 			
 			return interaction.reply({ content: message.replace(/{aroles}/g, added).replace(/{rroles}/g, removed), ephemeral: true });
 		}
+	}
+	
+	if (interaction.isButton()) {
+		TicketManager(interaction, client);
 	}
 }

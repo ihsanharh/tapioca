@@ -1,5 +1,6 @@
 const { Client, Collection, Intents } = require('discord.js');
 const { readdirSync } = require('fs');
+const { connect } = require('mongoose');
 const textInput = require("../../lib/discord-modals");
 
 class Tapioca extends Client {
@@ -40,7 +41,9 @@ class Tapioca extends Client {
 	
 	start() {
 		this.prepare();
-		
+		connect(process.env.DATABASE).then(() => {
+			console.log("connected to MongoDB.");
+		})
 		this.login(process.env.TOKEN);
 	}
 	
