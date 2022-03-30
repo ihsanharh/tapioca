@@ -1,7 +1,9 @@
 const config = require("../../config/config.json");
+const Cleverbot = require("../../plugins/CleverBot.js")
 
 module.exports = async (message, client) => {
 	if (!message.guild) return;
+	Cleverbot(message);
 	
 	message.prefix = config.default_prefix;
 	
